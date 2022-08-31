@@ -1,0 +1,62 @@
+{% extends 'women/base.html' %}
+{% load static %}
+{% block content %}
+<link type="text/css" href="{% static 'women/css/map.css' %}" rel="stylesheet" />
+<link type="text/css" href="{% static 'women/css/demo.css' %}" rel="stylesheet" />
+<link type="text/css" href="{% static 'chat/css/chat.css' %}" rel="stylesheet">
+<h1>Территория: {{maps.name}}</h1>
+
+<table>
+    <tr>
+        <td>
+            <div class="container" style="background-image: url({% static 'media/UI/gridme.png' %})">
+                <div class="content">
+                    <div class="component">
+                        <img class="resize-image" src="{{ maps.map.url }}" alt="Image" />
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<div id="rightsidebar">
+        <div class="textchatcontainer">
+            <div id="chat-log" class="content">
+                {% for message in messageHistory %}
+                {% if message.rolled == False %}
+                <div class='message'>
+                    <div class="spacer"></div>
+                    <div class='avatar' aria-hidden="true">
+                        <img src="{{ message.photo.url }}">
+                    </div>
+                    <span class="by">{{ message.name }}:</span>
+                    {{ message.message }}
+                </div>
+                {% else %}
+                <div class='message'>
+                    <div class="spacer"></div>
+                    <div class='avatar' aria-hidden="true">
+                        <img src="{{ message.photo.url }}">
+                    </div>
+                    <span class="by">{{ message.name }}:</span>
+                    <div class="formula">Бросает {{ message.message }}</div>
+                    <div class="formula formattedformula">{{ message.strRoll }}</div>
+                    <div class="rolled">={{ message.sumRoll }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+<div id="textchat-input" style="width: 290px;">
+    <textarea id="chat-message-input" style="width: 92%" class="ui-autocomplete-input" autocomplete="off"></textarea><br>
+    <button id="chat-message-submit" type="button" class="btn">Отправить</button>
+    {{ room_name|json_script:"room-name" }}
+    <button id="attack" class="btn">Атаковать</button>
+</div>
+
+<script type="text/javascript" src="{% static 'chat/js/chat_new.js' %}"></script>
+<script src="{% static 'women/js/canvas_map.js' %}"></script>
+
+{% endblock %}
+

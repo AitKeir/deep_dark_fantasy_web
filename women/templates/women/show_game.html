@@ -1,0 +1,37 @@
+{% extends 'women/base.html' %}
+{% load static %}
+{% block javascript %}
+    <script src="{% static 'women/js/map.js' %}"></script>
+    <script src="{% static 'women/js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+    <script src="{% static 'women/js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+    <script src="{% static 'women/js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h1 class="page-header">Игра: {{game.name}}</h1>
+
+<button type="button"
+        class="btn btn-primary js-create-map"
+        data-url="{% url 'add_map' game.id %}">
+    <span class="glyphicon glyphicon-plus"></span>
+    Добавить территорию
+</button>
+
+<h2>Территории в игре:</h2>
+
+<table class="table" id="map-table">
+    <tbody>
+        {% include 'women/includes/partial_map_list.html' %}
+    </tbody>
+</table>
+<div class="modal fade" id="modal-map">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+</div>
+<!--{% if post.photo %}-->
+<!--<p><img class="img-article-left" src="{{post.photo.url}}"></p>-->
+<!--{% endif %}-->
+
+{% endblock %}

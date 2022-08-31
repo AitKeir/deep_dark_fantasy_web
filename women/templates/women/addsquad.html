@@ -1,0 +1,39 @@
+{% extends 'women/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+
+<form action="{% url 'add_squad' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-error">{{ form.non_field_errors }}</div>
+
+    {% for f in form %}
+    <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+
+
+    <button type="submit">Добавить</button>
+</form>
+<table cellspacing="20">
+    <thead>
+        <tr>
+            <th>Название команды</th>
+            <th>Название игры</th>
+        </tr>
+    </thead>
+    <tbody>
+	{% for p in posts %}
+    <tr>
+        <td>
+            {{p.name}}
+        </td>
+        <td>
+            {{p.game}}
+        </td>
+    </tr>
+	{% endfor %}
+    </tbody>
+</table>
+{% endblock %}

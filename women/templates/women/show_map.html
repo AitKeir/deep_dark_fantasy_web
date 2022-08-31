@@ -1,0 +1,48 @@
+{% extends 'women/base.html' %}
+{% load static %}
+{% block content %}
+<link type="text/css" href="{% static 'women/css/map.css' %}" rel="stylesheet" />
+<link type="text/css" href="{% static 'women/css/demo.css' %}" rel="stylesheet" />
+<h1>Территория: {{maps.name}}</h1>
+
+<!--        <td>-->
+<!--            <canvas height="666" id="finalcanvas" tabindex="-1" width="923" style="cursor: default;"></canvas>-->
+<!--            <script>-->
+<!--                var canv = document.getElementById("finalcanvas")-->
+<!--                ctx = canv.getContext('2d')-->
+<!--                var img = new Image();-->
+<!--                img.src = "{{maps.map.url}}"-->
+<!--                img.onload = function() {-->
+<!--                    ctx.drawImage(img, 0, 0);-->
+<!--                }-->
+<!--            </script>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--{% if post.photo %}-->
+<!--<p><img class="img-article-left" src="{{post.photo.url}}"></p>-->
+<!--{% endif %}-->
+<table>
+    <tr>
+        <td>
+            <div class="container" style="background-image: url({% static 'media/UI/gridme.png' %})">
+                <div class="content">
+            <!--        <header class="codrops-header">-->
+            <!--            <h1>Image Resizing &amp; Cropping <br /><span>with Canvas</span></h1>-->
+            <!--        </header>-->
+                    <div class="component">
+                        <img class="resize-image" src="{{ maps.map.url }}" alt="Image" />
+                    </div>
+            <!--        <div class="a-tip">-->
+            <!--            <p><strong>Hint:</strong> hold <span>SHIFT</span> while resizing to keep the original aspect ratio.</p>-->
+            <!--        </div>-->
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script src="{% static 'women/js/canvas_map.js' %}"></script>
+
+{% endblock %}
+

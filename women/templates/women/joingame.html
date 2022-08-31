@@ -1,0 +1,29 @@
+{% extends 'women/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+
+<!--<form action="{% url 'join_game' %}" method="post" enctype="multipart/form-data">-->
+    {% csrf_token %}
+
+<!--    <div class="form-error">{{ form.non_field_errors }}</div>-->
+
+<!--    {% for f in form %}-->
+<!--    <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>-->
+<!--    <div class="form-error">{{ f.errors }}</div>-->
+<!--    {% endfor %}-->
+
+<!--    <button type="submit">Войти</button>-->
+<!--</form>-->
+<table class="table" id="book-table">
+    {% for game in games %}
+        <tr>
+            <td>
+                <a href="{{ game.get_absolute_url }}">
+                    <input type="button" value="{{game.name}}">
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

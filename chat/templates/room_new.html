@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+
+    <link href="{% static 'css/chat.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div id="rightsidebar">
+        <div class="textchatcontainer">
+            <div id="chat-log" class="content">
+                {% for message in messageHistory %}
+                {% if message.rolled == False %}
+                <div class='message'>
+                    <div class="spacer"></div>
+                    <div class='avatar' aria-hidden="true">
+                        <img src="{{ message.player.photo.url }}">
+                    </div>
+                    <span class="by">{{ message.player.name }}:</span>
+                    {{ message.message }}
+                </div>
+                {% else %}
+                <div class='message'>
+                    <div class="spacer"></div>
+                    <div class='avatar' aria-hidden="true">
+                        <img src="{{ message.player.photo.url }}">
+                    </div>
+                    <span class="by">{{ message.player.name }}:</span>
+                    <div class="formula">Бросает {{ message.message }}</div>
+                    <div class="formula formattedformula">{{ message.strRoll }}</div>
+                    <div class="rolled">={{ message.sumRoll }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id="textchat-input" style="width: 290px;">
+        <textarea id="chat-message-input" style="width: 92%" class="ui-autocomplete-input" autocomplete="off"></textarea><br>
+        <button id="chat-message-submit" type="button" class="btn">Отправить</button>
+        {{ room_name|json_script:"room-name" }}
+    </div>
+
+    <script type="text/javascript" src="{% static 'js/chat_new.js' %}"></script>
+</body>
+</html>
